@@ -2,7 +2,8 @@
 
 ## Objective
 
-Developed an end-to-end detection pipeline utilizing Dockerized Shuffle SOAR to orchestrate real-time incident response. By capturing granular system behaviors via auditd and network telemetry via Suricata, the system employs an Isolation Forest anomaly detection model to identify sophisticated threats. Managed via Wazuh and Rsyslog, this project demonstrates a robust ability to automate the identification of "living-off-the-land" attacks against Linux infrastructure.
+Engineered an advanced Machine Learning-driven detection pipeline centered on an Isolation Forest anomaly detection model. By leveraging a Dockerized Shuffle SOAR framework on Ubuntu Server, the system autonomously analyzes high-fidelity telemetry from auditd and Suricata. This architecture demonstrates the power of unsupervised learning to detect "living-off-the-land" attacks and zero-day threats that bypass traditional signature-based SIEM rules.
+
 
 ### Skills Learned
 
