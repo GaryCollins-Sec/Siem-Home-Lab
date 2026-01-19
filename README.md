@@ -1,7 +1,7 @@
 # Siem Home Lab
 
 ## Objective
-This project involved building a controlled Security Operations Center (SOC) home lab environment. I deployed a Wazuh SIEM to monitor a "victim" Ubuntu machine and simulated real-world attack vectors using Kali Linux. The goal was to configure log ingestion, analyze security events, and tune detection rules to identify malicious activity.
+Built a home SIEM lab to evaluate host-based detection capabilities using Wazuh. The environment simulated real-world attacker activity from a Kali Linux system targeting an Ubuntu endpoint. The goal was to assess telemetry visibility, alert fidelity, and detection gaps rather than achieve perfect alerting.
 
 ### Skills Learned
 - Deployment & Enrollment: You learned how to deploy a complex SIEM (Wazuh) and enroll endpoints using agents. This demonstrates I can manage the "plumbing" of a security stack.
@@ -37,7 +37,7 @@ Reference: SIEM 1
 
 
 
-In this phase of the project, I used the Linux command line on the Ubuntu-Victim endpoint to verify its network configuration and IP address. By executing the ip a command, I confirmed the agent's network identity, ensuring a stable connection within the isolated lab environment for log forwarding to the Wazuh Manager. This step was critical for validating that the endpoint's telemetry was correctly attributed to the specific target during the simulated attack and monitoring phases.
+In this phase of the project, I validated the Ubuntu victim endpoint’s network identity using the ip a command. This confirmed the assigned IP address and network configuration, ensuring reliable connectivity within the isolated lab environment for log forwarding to the Wazuh Manager. Verifying endpoint identity was essential to accurately attribute generated telemetry to the targeted host during the simulated attack and monitoring phases.
 
 
 Reference: SIEM 2
@@ -50,7 +50,7 @@ Reference: SIEM 2
 
 
 
-In this final phase of the project, I used the Kali Linux terminal to conduct network reconnaissance and verify connectivity to the target. By executing a targeted ping command to the Ubuntu-Victim IP address, I confirmed active communication and low latency within the isolated virtual network. This established the necessary baseline for launching simulated attacks, such as Hydra brute-forcing and Nmap scanning, which I subsequently monitored through the Wazuh SIEM to validate detection and response capabilities.
+Performed baseline network reconnaissance from the Kali attacker by validating connectivity to the Ubuntu victim via targeted ping. This confirmed the lab was prepared for subsequent simulated attacks, including Hydra brute-forcing and Nmap scanning, monitored through the Wazuh SIEM.
 
 
 
@@ -66,7 +66,7 @@ Reference: SIEM 3
 
 
 
-I utilized Nmap 7.94SVN on my Kali Linux machine to conduct an aggressive scan of the target endpoint. By executing the nmap -A -T4 command, I performed simultaneous OS detection, service versioning, and traceroute analysis to map the attack surface of the Ubuntu-Victim. The scan successfully identified the target as an Oracle VirtualBox virtual NIC with a rapid response time of 0.0014s latency, confirming the high-speed connectivity within my isolated lab environment. This activity was designed to trigger "Multiple connection attempts" alerts within the Wazuh SIEM, allowing me to verify that the manager could distinguish between standard network traffic and active scanning behavior.
+I conducted an aggressive network scan from the Kali Linux attacker host using Nmap to enumerate the Ubuntu victim’s attack surface. By executing the nmap -A -T4 command, I performed OS detection, service versioning, and traceroute analysis to simulate active reconnaissance behavior. This activity was intentionally designed to generate a high volume of connection attempts, allowing me to evaluate whether the Wazuh SIEM could detect and alert on scanning behavior and distinguish it from normal network traffic.
 
 
 
@@ -76,7 +76,7 @@ Reference: SIEM 4
 <img width="331" height="71" alt="Hydra" src="https://github.com/user-attachments/assets/9c7fa96b-13f8-464f-bb1d-afe46fd1010b" />
 
 
-In this final execution phase, I utilized Hydra v9.5 on my Kali Linux machine to perform a simulated SSH brute-force attack against the target endpoint. By targeting the root user and leveraging the industry-standard rockyou.txt wordlist, I attempted to force an authentication breakthrough to test the SIEM's detection capabilities. This active exploit was designed to trigger high-severity alerts within Wazuh, allowing me to verify the system's ability to identify and log rapid-fire credential-stuffing attempts in real time.
+Simulated an SSH brute-force attack using Hydra to generate high-frequency authentication attempts, validating Wazuh’s ability to detect and alert on credential-stuffing behavior.
 
 
 
@@ -86,8 +86,7 @@ Reference: SIEM 5
 <img width="1572" height="720" alt="Screenshot 2026-01-18 190811" src="https://github.com/user-attachments/assets/b665903d-a371-4014-adc0-02a6dadfbad0" />
 
 
-In this project, I engineered a SOC Home Lab using Wazuh SIEM to monitor and analyze real-world cyberattacks. By integrating an Ubuntu 24.04 agent, I enabled real-time log ingestion and kernel-level monitoring. I simulated a high-frequency SSH brute-force attack using Hydra, which the manager successfully detected as a Level 10 (High Severity) event. The dashboard validates the transition from raw logs to actionable intelligence, mapping the attack to MITRE ATT&CK T1110 (Brute Force) and providing a visual timeline of the incident for rapid response and compliance reporting.
-
+I designed a SOC-focused home lab using Wazuh SIEM to evaluate detection coverage for credential-based attacks. An Ubuntu 24.04 endpoint was instrumented with a Wazuh agent to collect authentication and system logs in real time. A simulated SSH brute-force attack generated high-volume authentication failures, which Wazuh correlated into a Level 10 (High Severity) alert and mapped to MITRE ATT&CK T1110. The resulting dashboard illustrates how raw telemetry is enriched, correlated, and presented as actionable intelligence for SOC analysis.
 
 
 
@@ -97,14 +96,14 @@ Reference: SIEM 6
 <img width="1566" height="729" alt="Screenshot 2026-01-18 192321" src="https://github.com/user-attachments/assets/07a03d97-e310-4786-a2eb-6b544508ffb5" />
 
 
-I configured a Wazuh SIEM to provide deep visibility into endpoint security through the integration of a rootcheck engine and kernel-level auditing. By analyzing the ingested event data, I successfully identified and categorized multiple host-based anomalies (Rule 510) and active policy enforcements via AppArmor denials (Rule 52002). The project demonstrated my ability to:
+Wazuh SIEM detecting host-level anomalies (Rule 510) and AppArmor policy enforcements (Rule 52002) via Rootcheck and kernel auditing.
 
 Reference: SIEM 7
 
 
 <img width="1101" height="666" alt="Screenshot 2026-01-18 192745" src="https://github.com/user-attachments/assets/5075cb64-2798-449d-9e42-9ec32f0da12a" />
 
-In this project, I configured Wazuh to perform deep-level auditing of an Ubuntu-Victim endpoint through host-based anomaly detection and kernel-level policy enforcement. By monitoring Rootcheck (Rule 510) and AppArmor (Rule 52002) events, I gained visibility into suspicious system behavior and unauthorized process attempts. I further mapped these activities to PCI DSS and GDPR compliance standards, demonstrating the ability to transform raw endpoint telemetry into professional, audit-ready security intelligence.
+Configured Wazuh for host-level anomaly detection and kernel policy enforcement on an Ubuntu endpoint. Analysis of Rootcheck (Rule 510) and AppArmor (Rule 52002) events provided visibility into suspicious behaviors and unauthorized process attempts. Activities were mapped to PCI DSS and GDPR standards, illustrating the conversion of raw telemetry into actionable, compliance-aligned security intelligence.
 
 Reference: SIEM 8
 
@@ -116,7 +115,16 @@ Reference: SIEM 8
 
 
 
-I utilized Wazuh SIEM to perform deep-level auditing of an Ubuntu-Victim endpoint through host-based anomaly detection and kernel-level policy enforcement. By monitoring Rootcheck (Rule 510) and AppArmor (Rule 52002) events, I gained visibility into suspicious system behavior and unauthorized process attempts. I further mapped these activities to PCI DSS (10.6.1, 10.2.6) and GDPR compliance standards, demonstrating the ability to transform raw endpoint telemetry into professional, audit-ready security intelligence.
+Wazuh SIEM performing deep-level auditing of an Ubuntu victim endpoint via host-based anomaly detection and kernel-level policy enforcement. Monitoring Rootcheck (Rule 510) and AppArmor (Rule 52002) events provided visibility into suspicious system behavior and unauthorized process attempts. Activities were mapped to PCI DSS (10.6.1, 10.2.6) and GDPR compliance standards, demonstrating the transformation of raw endpoint telemetry into actionable, audit-ready security intelligence.
 
+### Lessons Learned:
 
+- Telemetry gaps matter: Some attack activity did not trigger alerts due to missing or misconfigured audit logs, highlighting the importance of complete endpoint coverage.
 
+- Rule tuning is critical: Default Wazuh rules generated false positives; tuning improved alert fidelity.
+
+- Detection vs. response: Detecting events is only the first step—mapping alerts to MITRE ATT&CK and compliance standards ensures actionable intelligence.
+
+- Simulated attacks are valuable: Controlled Hydra and Nmap simulations allowed safe testing without risking real systems.
+
+- Continuous improvement: Even a well-configured SIEM requires iterative testing, analysis, and updates to maintain effective coverage.
