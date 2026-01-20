@@ -1,4 +1,4 @@
-# Siem Home Lab
+# Detection Engineering Lab
 
 ## Objective
 Built a home SIEM lab to evaluate host-based detection capabilities using Wazuh. The environment simulated real-world attacker activity from a Kali Linux system targeting an Ubuntu endpoint. The goal was to assess telemetry visibility, alert fidelity, and detection gaps rather than achieve perfect alerting.
